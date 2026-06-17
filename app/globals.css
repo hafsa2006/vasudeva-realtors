@@ -1,26 +1,162 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f4f1ea;
+  --foreground: #1a1916;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Warm Alabaster and Obsidian Black Theme (Aman Resorts Inspired) */
+  --color-paper: #faf7f0;       /* Warm Alabaster Cream */
+  --color-paper-soft: #f4efdf;  /* Soft Warm Sand */
+  --color-surface: #ffffff;
+  --color-ink: #0c0c0b;         /* Obsidian Black */
+  --color-ink-soft: #3d3a35;    /* Deep Charcoal */
+  --color-muted: #4c4a45;       /* Darkened Charcoal-Taupe */
+  --color-line: #d6d0c4;        /* Soft Warm Border */
+  --color-line-strong: #b8b0a0; /* Medium Warm Border */
+  --color-accent: #bca374;      /* Soft Brass Gold */
+  --color-accent-soft: #cfc0a2; /* Lighter Brass */
+
+  /* Luxury Gold and Dark palette */
+  --color-luxury-black: #050505;
+  --color-luxury-charcoal: #0e0e0d;
+  --color-luxury-gold: #c5a880;
+  --color-luxury-gold-soft: #b09672;
+  --color-luxury-gold-light: #f5eedf;
+  --color-luxury-gray: #1d1d1b;
+  --color-luxury-muted: #8e8b82;
+
+  --font-sans: var(--font-plus-jakarta);
+  --font-serif: var(--font-cormorant);
+  --font-display: var(--font-display);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-plus-jakarta), Arial, Helvetica, sans-serif;
 }
+
+/* Subtle paper grain */
+.bg-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) scale(1.04);
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow {
+    animation: none;
+  }
+}
+
+/* Luxury specific classes */
+.luxury-glass {
+  background: rgba(10, 10, 10, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(197, 168, 128, 0.1);
+}
+
+.luxury-gradient-text {
+  background: linear-gradient(135deg, #f5eedf 0%, #c5a880 50%, #9e825a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.luxury-button-gold {
+  background: linear-gradient(135deg, #c5a880 0%, #b09672 100%);
+  color: #050505;
+  box-shadow: 0 4px 20px rgba(197, 168, 128, 0.15);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-button-gold:hover {
+  background: linear-gradient(135deg, #d3ba96 0%, #c5a880 100%);
+  box-shadow: 0 6px 24px rgba(197, 168, 128, 0.25);
+  transform: translateY(-2px);
+}
+
+.luxury-border-gold {
+  border-color: rgba(197, 168, 128, 0.35);
+}
+
+.luxury-border-gold-soft {
+  border-color: rgba(197, 168, 128, 0.15);
+}
+
+/* Hide scrollbars but preserve functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* --- Hero cinematic atmosphere --- */
+
+/* Slow drifting volumetric light rays */
+@keyframes hero-ray-drift {
+  0%,
+  100% {
+    transform: translate3d(-4%, 0, 0) rotate(9deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate3d(4%, 0, 0) rotate(9deg);
+    opacity: 0.55;
+  }
+}
+.animate-hero-ray {
+  animation: hero-ray-drift 18s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+
+/* Soft drifting depth fog */
+@keyframes hero-fog-drift {
+  0%,
+  100% {
+    transform: translate3d(-2%, 0, 0);
+  }
+  50% {
+    transform: translate3d(2%, 0, 0);
+  }
+}
+.animate-hero-fog {
+  animation: hero-fog-drift 24s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Premium layered shadow for floating glass elements */
+.shadow-luxe {
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.25),
+    0 18px 40px -12px rgba(0, 0, 0, 0.55),
+    0 40px 90px -30px rgba(0, 0, 0, 0.65);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-ray,
+  .animate-hero-fog {
+    animation: none;
+  }
+}
+
